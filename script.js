@@ -5,7 +5,7 @@ let actualites = JSON.parse(localStorage.getItem('actualites')) || [];
 function afficherActualites() {
     const container = document.getElementById('newsContainer');
     container.innerHTML = ''; // Réinitialiser le contenu
-    actualites.forEach(actualite => {
+    actualites.forEach((actualite, index) => {
         const div = document.createElement('div');
         div.className = 'newsItem';
         div.innerHTML = `
@@ -13,8 +13,17 @@ function afficherActualites() {
             <p>${actualite.description}</p>
             ${actualite.image_url ? `<img src="${actualite.image_url}" alt="Image" style="width:100%;">` : ''}
             <small>Publié le : ${actualite.date}</small>
+            <button class="btn-supprimer" data-index="${index}">Supprimer</button>
         `;
         container.appendChild(div);
+    });
+
+    // Ajouter des écouteurs sur les boutons "Supprimer"
+    document.querySelectorAll('.btn-supprimer').forEach(button => {
+        button.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+            supprimerActualite(index);
+        });
     });
 }
 
@@ -43,6 +52,18 @@ document.getElementById('publicationForm').addEventListener('submit', function(e
     this.reset();
     afficherActualites();
 });
+
+// Fonction pour supprimer une actualité
+function supprimerActualite(index) {
+    // Supprimer l'élément du tableau
+    actualites.splice(index, 1);
+
+    // Mettre à jour LocalStorage
+    localStorage.setItem('actualites', JSON.stringify(actualites));
+
+    // Actualiser l'affichage
+    afficherActualites();
+}
 
 // Afficher les actualités au chargement
 afficherActualites();
