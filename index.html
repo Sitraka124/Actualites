@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Actualités de l'Église</h1>
+    
+    <!-- Panneau de publication -->
+    <section id="publication">
+        <h2>Publier une actualité</h2>
+        <form id="publicationForm">
+            <label for="titre">Titre :</label>
+            <input type="text" id="titre" required><br><br>
+            
+            <label for="description">Description :</label>
+            <textarea id="description" rows="4" required></textarea><br><br>
+            
+            <label for="image_url">Image URL :</label>
+            <input type="url" id="image_url"><br><br>
+            
+            <button type="submit">Publier</button>
+        </form>
+    </section>
+    
+    <!-- Section des actualités -->
+    <section id="actualites">
+        <h2>Les actualités</h2>
+        <div id="newsContainer"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
